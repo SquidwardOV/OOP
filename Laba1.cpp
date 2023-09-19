@@ -25,10 +25,13 @@ public:
 	int ToSecond();
 	int ToMinute();
 	bool TimeComp(const Time& time);
-
+	std::string toString();
 };
 
+
 function.cpp
+
+	
 #include "Time.h"
 #include <iostream>
 
@@ -72,13 +75,11 @@ Time::Time(int second) {
 		this->minute = 59;
 		this->second = 59;
 	}
-	this->hour = 0;
+	this->hour = second / 3600;
+	second %= 3600;
 	this->minute = 0;
 	this->second = 0;
-	while (second >= 3600) {
-		hour += 1;
-		second -= 3600;
-	}
+	
 	while (second >= 60) {
 		minute += 1;
 		second -= 60;
@@ -94,26 +95,16 @@ Time::Time(const Time& time) {
 
 void Time::TimeAdd(int second) {
 	if (second > 86400) {
-
+		second %= 86400;
 	}
-	else {
-		while (second >= 3600) {
-			hour += 1;
-			second -= 3600;
-		}
-		while (second >= 60) {
-			minute += 1;
-			second -= 60;
-		}
-		this->second = second;
-		int secIn = int(this->hour) * 3600 + int(this->minute) * 60 + int(this->second);
-		if (secIn > 86400) {
-			this->hour = 23;
-			this->minute = 59;
-			this->second = 59;
-		}
+	int secIn = hour * 3600 + minute * 60 + this->second;
+	secIn += second;
+	if (secIn >= 86400) {
+		secIn %= 86400;
 	}
-
+	hour = secIn / 3600;
+	minute = (secIn % 3600) / 60;
+	this->second = secIn % 60;
 }
 
 int Time::TimeDif(const Time& time) {
@@ -165,31 +156,36 @@ bool Time::TimeComp(const Time& time) {
 		return false;
 	}
 }
-void Time::Show() {
+
+std::string Time::toString() {
+	std::string timeString = "";
 	if (int(hour) > 9) {
-		std::cout << int(hour);
+		timeString += std::to_string(int(hour));
 	}
 	else {
-		std::cout << '0' << int(hour);
+		timeString += '0' + std::to_string(int(hour));
 	}
-	std::cout << ':';
+	timeString += ':';
 	if (int(minute) > 9) {
-		std::cout << int(minute);
+		timeString += std::to_string(int(minute));
 	}
 	else {
-		std::cout << '0' << int(minute);
+		timeString += '0' + std::to_string(int(minute));
 	}
-	std::cout << ':';
+	timeString += ':';
 	if (int(second) > 9) {
-		std::cout << int(second);
+		timeString += std::to_string(int(second));
 	}
 	else {
-		std::cout << '0' << int(second);
+		timeString += '0' + std::to_string(int(second));
 	}
-	std::cout << '\n';
+	return timeString;
 }
 
+
 main.cpp
+
+	
 #include "Time.h"
 #include <iostream>
 
@@ -197,24 +193,24 @@ main.cpp
 
 int main() {
     Time clocked;
-    Time clock2(5000);
+    Time clock2(86399);
 
     Time clock3(clock2);
     Time clock4("20:00:42");
 
     clock2.TimeAdd(543);
-    clock2.Show();
+
+    std::cout << clock2.toString() << std::endl;
 
     clock3.TimeSub(450);
 
-    clock3.Show();
+  
 
     clock4.ToSecond();
-    
-    clock4.Show();
+
 
     clock2.getMinute();
 
-    clock2.Show();
+  
 
 }
