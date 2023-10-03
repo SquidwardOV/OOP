@@ -9,21 +9,76 @@ private:
 
 public:
     Money();
+    /// <summary>
+    /// конструктор
+    /// </summary>
+    /// <param name="rubles">рубли</param>
+    /// <param name="kopecks">копейки</param>
     Money(long* rubles, unsigned char* kopecks);
+    /// <summary>
+    /// конструктор копирования
+    /// </summary>
+    /// <param name="other">сумма</param>
     Money(const Money& other);
     ~Money();
-
+    /// <summary>
+    /// Перегруженный оператор присваивания
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
     Money& operator=(const Money& other);
 
-    Money operator+(const Money& other) const;
-    Money operator-(const Money& other) const;
+    /// <summary>
+    /// Перегруженный оператор сложения
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    Money operator+(const Money& other)const;
 
-    bool operator==(const Money& other) const;
-    bool operator!=(const Money& other) const;
-    bool operator<(const Money& other) const;
-    bool operator>(const Money& other) const;
-
+    /// <summary>
+    /// перегруженный оператор вычитания
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    Money operator-(const Money& other)const;
+    /// <summary>
+    /// перегруженный оператор сравнения
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    bool operator==(const Money& other)const;
+    /// <summary>
+    /// перегруженный оператор неравенства
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    bool operator!=(const Money& other)const;
+    /// <summary>
+    /// перегруженные оператор сравнения
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    bool operator<(const Money& other)const;
+    /// <summary>
+    /// перегруженный оператор сравнения
+    /// </summary>
+    /// <param name="other">сумма</param>
+    /// <returns>рубли и копейки</returns>
+    bool operator>(const Money& other)const;
+    /// <summary>
+    /// перегруженная операци ввода
+    /// </summary>
+    /// <param name="os">поток</param>
+    /// <param name="money">сумма</param>
+    /// <returns>рубли и копейки</returns>
     friend std::ostream& operator<<(std::ostream& os, const Money& money);
+
+    /// <summary>
+    /// перегруженная операция вывода
+    /// </summary>
+    /// <param name="is">поток</param>
+    /// <param name="money">сумма</param>
+    /// <returns>рубли и копейки</returns>
     friend std::istream& operator>>(std::istream& is, Money& money);
 };
 
