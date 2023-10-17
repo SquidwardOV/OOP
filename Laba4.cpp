@@ -131,4 +131,46 @@ int main() {
 
     return 0;
 }
-  
+
+
+#include <iostream>
+#include "Lorry.h"
+#include <windows.h>
+
+int main() {
+    SetConsoleOutputCP(1251);
+    Lorry lorry("Volvo", 6, 500, 2000);
+    Car* ptr;
+    while (true)
+    {
+        ptr = new Lorry("Volvo", 6, 500, 2000);
+        delete ptr;
+    }
+    std::cout << "До переобозначения:" << std::endl;
+    std::cout << "Марка грузовика: " << *lorry.getBrand() << std::endl;
+    std::cout << "Мощность грузовика: " << *lorry.getPower() << std::endl;
+    std::cout << "Грузоподъёмность грузовика: " << *lorry.getCargoCapacity() << std::endl;
+    std::cout << std::endl;
+
+    lorry.setPower(600);
+    lorry.updateCargoCapacity(500);
+    std::cout << "После переобозначения: " << std::endl;
+    std::cout << "Марка грузовика: " << *lorry.getBrand() << std::endl;
+    std::cout << "Мощность грузовика: " << *lorry.getPower() << std::endl;
+    std::cout << "Грузоподъёмность грузовика: " << *lorry.getCargoCapacity() << std::endl;
+
+    std::cout << std::endl;
+
+    Car car("Mercedes", 12, 800);
+    std::cout << "До переобозначения:" << std::endl;
+    std::cout << "Марка машины: " << *car.getBrand() << std::endl;
+    std::cout << "Мощность машины: " << *car.getPower() << std::endl;
+    std::cout << std::endl;
+    car.updatePower(50);
+
+    std::cout << "После чиповки двигателя:" << std::endl;
+    std::cout << "Марка машины: " << *car.getBrand() << std::endl;
+    std::cout << "Мощность машины: " << *car.getPower() << std::endl;
+
+    return 0;
+}
