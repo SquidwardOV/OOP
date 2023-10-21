@@ -10,7 +10,11 @@ private:
 
 public:
     Car(std::string brand, int numCylinders, int power);
-    ~Car();
+    virtual ~Car() {
+        delete brand;
+        delete numCylinders;
+        delete power;
+    }
     std::string* getBrand();
     int* getPower();
     void setPower(int newPower);
@@ -27,11 +31,6 @@ Car::Car(std::string brand, int numCylinders, int power) {
     this->power = new int(power);
 }
 
-Car::~Car() {
-    delete brand;
-    delete numCylinders;
-    delete power;
-}
 
 std::string* Car::getBrand() {
     return brand;
@@ -48,7 +47,6 @@ void Car::setPower(int newPower) {
 void Car::updatePower(int powerIncrease) {
     *power += powerIncrease;
 }
-
 
 
 Lorry.h
