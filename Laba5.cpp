@@ -90,15 +90,20 @@ main.cpp
 #include <iostream>
 #include <windows.h>
 
+void print(Body* b)
+{
+    std::cout << "Площадь: " << b->getSurfaceArea() << std::endl;
+    std::cout << "Объём: " << b->getVolume() << std::endl;
+}
+
 int main() {
     SetConsoleOutputCP(1251);
     Parallelepiped p(2.0, 3.0, 4.0);
-    std::cout << "Площадь параллелепипеда: " << p.getSurfaceArea() << std::endl;
-    std::cout << "Объём параллелепипеда: " << p.getVolume() << std::endl;
+    print(&p);
+   
 
     Ball b(5);
-    std::cout << "Площадь шара: " << b.getSurfaceArea() << std::endl;
-    std::cout << "Объём шара: " << b.getVolume() << std::endl;
+    print(&b);
 
     return 0;
 }
