@@ -28,7 +28,7 @@ public:
         }
     }
 
-    // Добавление элемента по итератору
+    
     void insert(const T& value, Node* position) {
         if (position == nullptr) {
             if (head == nullptr) {
@@ -174,7 +174,7 @@ public:
     Iterator end() const {
         return Iterator(nullptr);
     }
-    // Добавление элемента по итератору
+    
     void insert(const T& value, Iterator position) {
         if (position.current == nullptr) {
             Node* newNode = new Node(value);
